@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{%  extends 'layout.html' %}
+{% block body %}
+<div class="container" style="padding-top: 50px">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a href="#general" class="nav-link active" data-toggle="tab">General</a>
+        </li>
+        <li class="nav-item">
+            <a href="#news" class="nav-link" data-toggle="tab">News & Alerts</a>
+        </li>
+        <li class="nav-item">
+            <a href="#education" class="nav-link" data-toggle="tab">Education</a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="general">
+            <p>Insert Information Here</p>
+        </div>
+
+        <div class="tab-pane fade" id="news">
+            <p>Insert Information Here</p>
+        </div>
+
+        <div class="tab-pane fade" id="education">
+            <p>Insert Information Here</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

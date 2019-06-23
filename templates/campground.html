@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="jumbotron text-left">
+        <!-- name -->
+        <p class="lead campgroundName" style="text-align:center;">{{ campground["name"] }}</p>
+        <style>
+            .campgroundName {
+                margin: 0;
+                padding-bottom: 15px;
+                results: 0;
+                font-weight: bold
+            }
+        </style>
+
+        <!-- description, park link, and regulations  -->
+        <p class="description" style="font-style:italic">{{ campground["description"] }}</p>
+        <p><b>For more information on events, news, alerts, etc., in the area, please visit the page for this site's
+            respective</b>
+            <a href={{ url_for('park', park_code=campground["parkCode"]) }}>national park</a>.</p>
+        {% if campground["regulationsoverview"] == "" %}
+            <p><b>Regulations:</b> Information unavailable</p>
+        {% else %}
+            <p class="regulations"><b>Regulations: </b>{{ campground["regulationsoverview"] }}</p>
+        {% endif %}
+
+        <!-- directions -->
+        {% if campground["directionsoverview"] == "" %}
+            <p><b>Directions: </b> Information unavailable </p>
+        {% else %}
+            <p><b>Directions: </b> {{ campground["directionsoverview"] }}</p>
+        {% endif %}
+
+        <!-- accessibility  -->
+        <b>Accessibility Information:</b>
+        <div style="padding-left: 40px">
+	        <!-- wheelchair access  -->
+            <p>
+                <p style="display: inline;"><img src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/wheelchair-accessible-black-22.svg"/></p>
+                {% if campground["accessibility"]["wheelchairaccess"] == "" %}
+                    <p style = "display: inline;">Wheelchair Access: Information unavailable</p>
+                {% else %}
+                    <p style = "display: inline;"> Wheelchair Access: {{ campground["accessibility"]["wheelchairaccess"] }}</p>
+                {% endif %}
+            </p>
+
+            <!-- internet connectivity-->
+            <p>
+                <p style="display: inline;"><img src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/wi-fi-black-22.svg"/></p>
+                {% if campground["amenities"]["internetconnectivity"] == "" %}
+                    <p style = "display: inline;">Internet Connectivity: Information unavailable</p>
+                {% else %}
+                    <p style = "display: inline;"> Internet Connectivity: {{ campground["amenities"]["internetconnectivity"] }}</p>
+                {% endif %}
+            </p>
+
+            <!-- cell phone reception -->
+            <p>
+                <p style="display: inline;"><img src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/telephone-black-22.svg"/></p>
+                {% if campground["amenities"]["cellphonereception"] == "" %}
+                    <p style="display: inline;">Cell Phone Reception: Information unavailable</p>
+                {% else %}
+                    <p style="display: inline;"> Cell Phone Reception: {{ campground["amenities"]["cellphonereception"] }}</p>
+                {% endif %}
+            </p>
+
+            <!-- fires stove policy-->
+            <p>
+                <p style="display: inline;"><img src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/grill-black-22.svg"/></p>
+                {% if campground["accessibility"]["firestovepolicy"] == "" %}
+                    <p style="display: inline;">Fire Stove: Information unavailable</p>
+                {% else %}
+                    <p style="display: inline;"> Fire Stove Policy: {{ campground["accessibility"]["firestovepolicy"] }}</p>
+                {% endif %}
+            </p>
+
+        </div>
+    </div>
+{% endblock %}

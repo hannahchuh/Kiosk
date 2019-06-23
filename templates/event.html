@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+{% block body %}
+
+    <div class="jumbotron text-left">
+        <p class="lead eventName" style="text-align:center;">{{ event["title"] }}</p>
+        <style>
+            .eventName {
+                margin: 0;
+                padding-bottom: 15px;
+                results: 0;
+                font-weight: bold
+            }
+        </style>
+
+        <!-- description, contact info and location-->
+        <p style="font-style:italic">{{ event["description"] }}</p>
+        <p>
+            <p style="display: inline;"><img src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/information-black-22.svg"/></p>
+            {% if event["contactname"] =="" %}
+                {% if event["contacttelephonenumber"] == "" %}
+                    <p style="display: inline;">No contact information available.</p>
+                {% else %}
+                    <p style="display: inline;">For more information contact {{ event["contacttelephonenumber"] }}</p>
+                {% endif %}
+            {% else %}
+                <p style="display: inline;">For more information contact {{ event["contactname"] }} at {{ event["contacttelephonenumber"] }}</p>
+            {% endif %}
+        </p>
+         <p>
+            <p style="display: inline;"><img src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/maps-black-22.svg"/></p>
+            <p style="display: inline;">Location: {{ event["location"] }} at {{ event["parkfullname"] }}</p>
+        </p>
+
+        
+        <!-- dates -->
+        <p>
+            <p style="display: inline;"><img src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/calendar-events-black-22.svg"/></p>
+            <p style="display: inline;">Begins {{ event["datestart"] }} and ends {{ event["dateend"] }}</p>
+        </p>
+
+        <!-- times -->
+        <p>
+            <p style="display: inline;"><img src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/open-to-the-public-black-22.svg"/></p>
+            <p style="display: inline;">Times:</p>
+            <div style="padding-left: 40px">
+                {% for time in event["times"] %}
+                    <p>{{ time["timestart"] }} to {{ time["timeend"] }}</p>
+                {% endfor %}
+            </div>
+        </p>
+
+
+    </div>
+{% endblock %}

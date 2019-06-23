@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="container" style="padding-top: 50px">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <!-- information tabs headings -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a href="#general" class="nav-link active" data-toggle="tab">General</a>
+            </li>
+            <li class="nav-item">
+                <a href="#news" class="nav-link" data-toggle="tab">News & Alerts</a>
+            </li>
+            <li class="nav-item">
+                <a href="#education" class="nav-link" data-toggle="tab">Education</a>
+            </li>
+        </ul>
+
+        <!-- information in tabs -->
+        <div class="tab-content">
+            <!-- "General" tab -->
+            <div class="tab-pane fade show active" id="general">
+                <p class="lead parkName">{{ parkData["name"] }}</p>
+                <style>
+                    .parkName {
+                        margin: 0;
+                        padding-top: 15px;
+                        padding-bottom: 15px;
+                        results: 0;
+                        font-weight: bold
+                    }
+                </style>
+
+                <!-- description, states, weather, add'l info, and directions -->
+                <p class="description" style="font-style:italic">{{ parkData["description"] }}</p>
+                <p style="text-align: left"><b>States: </b> {{ parkData["states"] }}</p>
+                <p style="text-align: left"><b>Official Park Website: </b> Please click <a href={{ parkData["url"] }}>here</a>
+                <p style="text-align: left">
+                    <img style="padding-right: 5px" src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/information-black-22.svg"/>
+                    <b>Additional Information:</b> {{ parkData["directionsInfo"] }}
+                </p>
+                <p style="text-align: left">
+                    <img style="padding-right: 5px" src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/maps-black-22.svg"/>
+                    <b>Directions: </b>Please click <a href={{ parkData["directionsUrl"] }}>here</a>
+                </p>
+
+                <p style="text-align: left">
+                    <img style="padding-right: 5px" src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/sunny-black-22.svg"/>
+                    <b>Weather:</b> {{ parkData["weatherInfo"] }}
+                </p>
+
+                <!-- list of campgrounds in park -->
+                <p style="text-align: left">
+                    <img style="padding-right: 5px" src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/campsite-black-22.svg"/>
+                    <b>Campgrounds at {{ parkData["name"] }}: </b>
+                </p>
+                <div class="camps" style="padding-left: 40px">
+                    {% if parkCampgrounds %}
+                        {% for camp in parkCampgrounds %}
+                            <p style="text-align: left">{{ camp["name"] }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align: left"> None found. </p>
+                    {% endif %}
+                </div>
+
+                <!-- list of events at parks -->
+                <p style="text-align: left">
+                    <img style="padding-right: 5px" src = "https://www.nps.gov/maps/tools/symbol-library/assets/img/calendar-events-black-22.svg"/>
+                    <b style="padding-top: 20px">Events at {{ parkData["name"] }}: </b>
+                </p>
+                <div class="events" style="padding-left: 40px">
+                    {% if parkEvents %}
+                        {% for event in parkEvents %}
+                            <p style="text-align: left">{{ event["title"] }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align: left"> None found. </p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- "News & Alerts" tab -->
+            <div class="tab-pane fade" id="news">
+                <p class="alerts">Alerts</p>
+                <style>
+                    .alerts {
+                        margin: 0;
+                        padding-top: 15px;
+                        padding-bottom: 15px;
+                        font-weight: bold
+                    }
+                </style>
+
+                <!-- list of alerts -->
+                <div style="text-align: left">
+                    {% if parkAlerts %}
+                        {% for alert in parkAlerts %}
+                            <h style="font-weight: bold"><a href= {{ alert["url"] }}>{{ alert["title"] }}</a></h>
+                            <p style="padding-left:40px">{{ alert["description"] }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align: left">None found.</p>
+                    {% endif %}
+                </div>
+
+                <!-- list of news articles -->
+                <p style="font-weight:bold">News Articles</p>
+                <p style="font-style: italic">Abstracts for the article are displayed below the link.</p>
+                <div style="text-align: left">
+                    {% if parkNews %}
+                        {% for news in parkNews %}
+                            <h style="font-weight: bold"><a href={{ news["url"] }}>{{ news["title"] }}</a></h>
+                            <p style="padding-left:40px">{{ news["abstract"] }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align: left">None found.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- "Education" tab -->
+            <div class="tab-pane fade" id="education">
+                <p class="educationIntro">Learn more about {{ parkData["name"] }} with the educational resources
+                    below!</p>
+                <style>
+                    .educationIntro {
+                        margin: 0;
+                        padding-top: 15px;
+                        padding-bottom: 15px;
+                        font-style: italic
+                    }
+                </style>
+
+                <!-- list of people -->
+                <p style="font-weight:bold">Relevant People</p>
+                <div style="text-align: left">
+                    {% if parkPeople %}
+                        {% for person in parkPeople %}
+                            <h style="font-weight: bold"><a href={{ person["url"] }}>{{ person["title"] }}</a></h>
+                            <p style="padding-left:40px">{{ person["listingdescription"] }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align: left">None found.</p>
+                    {% endif %}
+                </div>
+
+                <!-- list of lesson plans -->
+                <p style="font-weight:bold">Lesson Plans</p>
+                <div style="text-align: left">
+                    {% if parkLessons %}
+                        {% for lesson in parkLessons %}
+                            <h style="font-weight: bold"><a href={{ lesson["url"] }}>{{ lesson["title"] }}</a></h>
+                            <div style="padding-left:40px">
+                                <p>{{ lesson["listingdescription"] }}</p>
+                                <p>Grade Level: {{ lesson["gradelevel"] }}</p>
+                                <p>Subject: {{ lesson[ "subject"] }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align: left">None found.</p>
+                    {% endif %}
+                </div>
+
+                <!-- list of articles -->
+                <p style="font-weight:bold">Informative Articles</p>
+                <div style="text-align: left">
+                    {% if parkArticles %}
+                        {% for article in parkArticles %}
+                            <h style="font-weight: bold"><a href={{ article["url"] }}>{{ article["title"] }}</a></h>
+                            <p style="padding-left:40px">{{ article["listingdescription"] }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p style="text-align: left">None found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

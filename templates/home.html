@@ -1,0 +1,55 @@
+{%  extends 'layout.html' %}
+{%  block body %}
+    <div class ="jumbotron text-center">
+        <h1>National Park Service Kiosk</h1>
+        <p class = "lead">You may search by fields such as park name, state, keywords, etc.</p>
+
+         <style>
+            .msg{
+                color: red;
+            }
+        </style>
+
+        <!-- error message (if applicable) -->
+        <p class = "lead msg">{{ message }}</p>
+
+        <!-- search fields -->
+        <div class = "col-sm-5">
+            <style>
+                .col-sm-5{
+                  margin-left: auto;
+                  margin-right: auto;
+                }
+            </style>
+
+            <form method = "POST" action ="/send">
+
+                <!-- search bar -->
+                <div class="form-group">
+                    <div class="input-group" >
+                        <input type="text" class="form-control" placeholder="Search" name="search-term" id="search-term">
+                        <div class="input-group-btn">
+                         <style>
+                            .button_gray{
+                                background-color: #ADCBE3
+                            }
+                        </style>
+                        <button class="btn nav_link button_gray" type="submit" href="/search_results">Go</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- filters -->
+                <select name = "filter" id="filter">
+                    <option value = "none"> -- select an option -- </option>
+                    <option value="park">Park</option>
+                    <option value="campground">Campground</option>
+                    <option value="event">Event</option>
+                </select>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
+{% block results %}
+{% endblock %}

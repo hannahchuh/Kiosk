@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{%  extends 'layout.html' %}
+{% block body %}
+
+<div class ="jumbotron text-left">
+    <p class = "lead parkName" style ="text-align:center;">{{ parkData["name"] }}</p>
+    <style>
+        .parkName{
+            margin: 0;
+            padding-bottom: 15px;
+            results:0;
+            font-weight: bold
+        }
+    </style>
+
+    <p class= "description" style="font-style:italic" >{{ parkData["description"] }}</p>
+    <p><b>States:</b> {{ parkData["states"] }}</p>
+    <p><b>Weather:</b> {{ parkData["weatherInfo"] }}</p>
+    <p><b>Additional Information:</b> {{ parkData["directionsInfo"] }}</p>
+    <p><b>Directions: </b>Please click <a href={{ parkData["directionsUrl"]}}>here</a></p>
+    <p><b>Official Park Website: </b> Please click <a href={{parkData["url"] }}>here</a></p>
+
+    <p><b>Campgrounds at {{ parkData["name"] }}: </b></p>
+    <div class = "camps" style = "padding-left: 30px">
+        {% if parkCampgrounds %}
+            {% for camp in parkCampgrounds %}
+                <p>{{ camp["name"] }}</p>
+            {% endfor %}
+        {% else %}
+            <p> None found. </p>
+        {% endif %}
+    </div>
+
+    <p><b style = "padding-top: 20px">Events at {{ parkData["name"] }}: </b></p>
+    <div class = "events" style = "padding-left: 30px">
+        {% if parkEvents %}
+            {% for event in parkEvents %}
+                <p>{{ event["title"] }}</p>
+            {% endfor %}
+        {% else %}
+            <p> None found. </p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

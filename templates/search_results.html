@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block body %}
+    <div class="jumbotron text-left">
+        <p class="lead search_results" style="text-align:center;">Search Results</p>
+        <style>
+            .results_list {
+                margin: 0;
+                results: 0;
+            }
+        </style>
+        <div class="container results_list">
+            <ul>
+                {% for park in parks %}
+                    <div><a href={{ url_for('park', park_code=park["parkCode"]) }}>{{ park["fullName"] }}</a></div>
+                {% endfor %}
+
+                {% for camp in campgrounds %}
+                    <div><a href={{ url_for('camp', camp_num=loop.index) }}>{{ camp["name"] }}</a></div>
+                {% endfor %}
+
+                {% for event in events %}
+                    <div><a href={{ url_for('event', event_num =loop.index) }}>{{ event["title"] }}</a></div>
+                {% endfor %}
+            </ul>
+        </div>
+{% endblock %}
