@@ -5,8 +5,7 @@
 
 <h3 align= "center"> Capital One Software Enginering Summit 2019 Coding Challenge </h3>
 
-This is my winning submission for the coding challenge for the Capital One Summit Software Engineering Summit of Summer '19. 
-This app is live at <https://npsk-app.herokuapp.com/> It functions as an automated information kiosk would at a live site. Users can search keywords and filter by state for events, national parks, and campgrounds. This app supplies basic information such as location and descriptions, as well as accessibility information, weather, contact information, etc.
+This is my winning submission for the Capital One Summit Software Engineering Summit of Summer '19. This app is live at <https://npsk-app.herokuapp.com/> It functions as an automated information kiosk would at a live site. Users can search keywords and filter by state for events, national parks, and campgrounds. This app supplies basic information such as location and descriptions, as well as accessibility information, weather, contact information, etc.
 
 ___
 
